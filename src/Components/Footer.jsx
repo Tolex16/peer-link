@@ -6,7 +6,7 @@ import logo from "../assets/icon.png";
 
 const Footer = () => {
   const navLinks = [
-    { path: "/", label: "STRATEGIES" },
+    { path: "/strategies", label: "STRATEGIES" },
     { path: "/insights", label: "INSIGHTS" },
     { path: "/about", label: "ABOUT" },
     { path: "/who-we-serve", label: "WHO WE SERVE" },

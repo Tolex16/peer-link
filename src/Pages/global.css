@@ -1,0 +1,11 @@
+/* Custom slim green scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #047857; /* green-700 */
+  border-radius: 20px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #e5e7eb; /* gray-200 */
+}

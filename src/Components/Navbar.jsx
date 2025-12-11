@@ -14,29 +14,28 @@ export default function Navbar() {
   };
 
   const strategiesLinks = [
-    { path: "/overview", label: "Overview" },
-    { path: "/energy", label: "Energy" },
-    { path: "/art", label: "Art" },
-    { path: "/blockchain-solutions", label: "Blockchain Solutions" },
+    { path: "/strategies", label: "Overview" },
+    { path: "/strategies/energy", label: "Energy" },
+    { path: "/strategies/art", label: "Art" },
+    { path: "/strategies/alternative-lending", label: "Alternative Lending" },
+    { path: "https://digiassetanalytics.com", label: "Blockchain Solutions" },
   ];
 
   const insightsLinks = [
-    { path: "/reinsurance", label: "Reinsurance" },
-    { path: "/alternative lending", label: "Alternative Lending" },
-    { path: "/multi-strategy", label: "Multi-Strategy" },
-    { path: "/lifeX", label: "LifeX" },
+    { path: "/insights/all", label: "All" },
+    { path: "/insights/investor-letters", label: "Investors Letters" },
+    { path: "/insights/insights", label: "Insights" },
   ];
 
   const aboutLinks = [
-    { path: "/company", label: "Company" },
-    { path: "/team", label: "Team" },
-    { path: "/careers", label: "Careers" },
+    { path: "/about/company", label: "Company" },
+    { path: "/about/leadership", label: "Leadership" },
   ];
 
   const serveLinks = [
-    { path: "/investors", label: "Investors" },
-    { path: "/institutions", label: "Institutions" },
-    { path: "/advisors", label: "Advisors" },
+    { path: "/who-we-serve/investors", label: "Investors" },
+    { path: "/who-we-serve/institutions", label: "Institutions" },
+    { path: "/we-we-serve/advisors", label: "Advisors" },
   ];
 
   const handleHome = () => navigate("/");
@@ -192,16 +191,14 @@ export default function Navbar() {
               Strategies <ChevronDown size={18} />
             </button>
             {openDropdown === "m-strategies" && (
-              <div className="mt-2 pl-4 space-y-2 text-gray-700">
-                {[
-                  "Overview",
-                  "Energy",
-                  "Single-Family Rentals",
-                  "Art",
-                  "Bitcoin",
-                ].map((item) => (
-                  <Link key={item} to="#" className="block">
-                    {item}
+              <div className="mt-2 pl-4 space-y-2 text-gray-800">
+                {strategiesLinks.map((link, index) => (
+                  <Link
+                    key={index}
+                    to={link.path}
+                    className="hover:bg-green-500 block"
+                  >
+                    {link.label}
                   </Link>
                 ))}
               </div>
@@ -217,15 +214,14 @@ export default function Navbar() {
               Insights <ChevronDown size={18} />
             </button>
             {openDropdown === "m-insights" && (
-              <div className="mt-2 pl-4 space-y-2 text-gray-700">
-                {[
-                  "Reinsurance",
-                  "Alternative Lending",
-                  "Multi-Strategy",
-                  "LifeX",
-                ].map((item) => (
-                  <Link key={item} to="#" className="block">
-                    {item}
+              <div className="mt-2 pl-4 space-y-2 text-gray-800">
+                {insightsLinks.map((link, index) => (
+                  <Link
+                    key={index}
+                    to={link.path}
+                    className="hover:bg-green-500 block"
+                  >
+                    {link.label}
                   </Link>
                 ))}
               </div>
@@ -241,10 +237,14 @@ export default function Navbar() {
               About <ChevronDown size={18} />
             </button>
             {openDropdown === "m-about" && (
-              <div className="mt-2 pl-4 space-y-2 text-gray-700">
-                {["Company", "Team", "Careers"].map((item) => (
-                  <Link key={item} to="#" className="block">
-                    {item}
+              <div className="mt-2 pl-4 space-y-2 text-gray-800">
+                {aboutLinks.map((link, index) => (
+                  <Link
+                    key={index}
+                    to={link.path}
+                    className="hover:bg-green-500 block"
+                  >
+                    {link.label}
                   </Link>
                 ))}
               </div>
@@ -260,20 +260,24 @@ export default function Navbar() {
               Who We Serve <ChevronDown size={18} />
             </button>
             {openDropdown === "m-serve" && (
-              <div className="mt-2 pl-4 space-y-2 text-gray-700">
-                {["Investors", "Institutions", "Advisors"].map((item) => (
-                  <Link key={item} to="#" className="block">
-                    {item}
+              <div className="mt-2 pl-4 space-y-2 text-gray-800">
+                {serveLinks.map((link, index) => (
+                  <Link
+                    key={index}
+                    to={link.path}
+                    className="block hover:bg-green-500"
+                  >
+                    {link.label}
                   </Link>
                 ))}
               </div>
             )}
           </div>
 
-          <Link to="#" className="block py-2">
+          <Link to="/contact" className="block py-2 hover:bg-green-500">
             Contact
           </Link>
-          <Link to="#" className="block py-2">
+          <Link to="/login" className="block py-2 hover:bg-green-500">
             Login
           </Link>
         </div>

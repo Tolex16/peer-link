@@ -47,30 +47,21 @@ export default function LearnMoreSection() {
           variants={fadeIn}
           transition={{ staggerChildren: 0.12 }}
         >
-          {[
-            "Reinsurance",
-            "Energy",
-            "Alternative Lending",
-            "Single-Family Rentals",
-            "Multi-Strategy",
-            "Art",
-            "LiFiX",
-            "Bitcoin",
-          ].map((item) => (
-            <motion.div
-              key={item}
-              className="flex justify-between items-center py-2 cursor-pointer group"
-              variants={fadeIn}
-              whileHover={{ x: 4 }}
-            >
-              <span className="text-lg group-hover:text-green-300 transition">
-                <Link to={item}>
-                {item}
-                </Link>
-              </span>
-              <ArrowRight className="w-5 h-5 text-green-400 group-hover:translate-x-1 transition" />
-            </motion.div>
-          ))}
+          {["Energy", "Art", "Alternative Lending", "Blockchain Solutions"].map(
+            (item) => (
+              <motion.div
+                key={item}
+                className="flex justify-between items-center py-2 cursor-pointer group"
+                variants={fadeIn}
+                whileHover={{ x: 4 }}
+              >
+                <span className="text-lg group-hover:text-green-300 transition">
+                  <Link to={item}>{item}</Link>
+                </span>
+                <ArrowRight className="w-5 h-5 text-green-400 group-hover:translate-x-1 transition" />
+              </motion.div>
+            )
+          )}
         </motion.div>
       </motion.div>
 

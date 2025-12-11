@@ -23,44 +23,50 @@ const Hero = () => {
       button: "View Strategies",
       route: "/strategies",
     },
+
     {
       img: Slide2,
-      title: "Global Investment Reach",
+      title: "Alternative Lending Insights",
       subtitle:
-        "Our diversified portfolio spans North America, Europe, and Asia to maximize performance and resilience.",
-      button: "Explore Markets",
-      route: "/markets",
+        "Access deep market intelligence across private credit, debt structuring, and alternative lending instruments.",
+      button: "Explore Lending",
+      route: "/insights/alternative-lending",
     },
+
     {
       img: Slide3,
-      title: "Investor-Centric Approach",
-      subtitle:
-        "We partner with private investors, institutions, and corporations to deliver long-term capital appreciation.",
-      button: "Learn More",
-      route: "/about",
-    },
-    {
-      img: Slide4,
-      title: "Energy Spotlight",
+      title: "Energy Strategies",
       subtitle:
         "Our unique hedging and structuring strategies unlock opportunity in global energy markets.",
-      button: "Energy Strategies",
-      route: "/energy",
+      button: "Energy Programs",
+      route: "/strategies/energy",
     },
+
+    {
+      img: Slide4,
+      title: "Who We Serve",
+      subtitle:
+        "We work alongside advisors, investors, and institutions to deliver long-term value and intelligent capital growth.",
+      button: "Advisors & Investors",
+      route: "/who-we-serve/investors",
+    },
+
     {
       img: Slide5,
-      title: "Focus. Be Humble. Be Kind.",
-      subtitle: "Our founding principles continue to guide every decision we make.",
-      button: "Our Values",
-      route: "/values",
+      title: "Company & Values",
+      subtitle:
+        "Focus. Be Humble. Be Kind. Our principles guide every decision we make as a firm.",
+      button: "Our Company",
+      route: "/about/company",
     },
+
     {
       img: Slide6,
-      title: "Long-Term Performance",
+      title: "Blockchain & Digital Strategy",
       subtitle:
-        "We engineer solutions that create lasting capital growth and client confidence.",
-      button: "Performance Reports",
-      route: "/performance",
+        "We engineer advanced blockchain and multi-strategy systems that create lasting performance and resilience.",
+      button: "Blockchain Solutions",
+      route: "/strategies/blockchain-solutions",
     },
   ];
 
