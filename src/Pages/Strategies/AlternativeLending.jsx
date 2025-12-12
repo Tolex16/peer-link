@@ -27,7 +27,7 @@ export default function AlternativeLending() {
               Alternative <br /> Lending
             </h1>
 
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-gray-100 text-lg leading-relaxed">
               Alternative lending refers to loans to consumers and small
               businesses funded by investors and non-bank financial
               institutions. Modern technology and underwriting expertise have
@@ -57,7 +57,7 @@ export default function AlternativeLending() {
               Hear from James Egan, Head of Alternative Lending
             </p>
           </motion.div>
-          <div className="border-t border-green-700 mt-10 gap-13 text-green-500 text-md flex items-center">
+          <div className="border-t border-green-700 mt-10 gap-15 text-green-500 text-md flex items-center">
             <div>
               <p className="cursor-pointer"
                 onClick={() =>

@@ -8,7 +8,12 @@ export default function LearnMoreSection() {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
-
+  const strategiesLinks = [
+    { path: "/strategies/energy", label: "Energy" },
+    { path: "/strategies/art", label: "Art" },
+    { path: "/strategies/alternative-lending", label: "Alternative Lending" },
+    { path: "https://digiassetanalytics.com", label: "Blockchain Solutions" },
+  ];
   return (
     <motion.div
       className="w-full bg-green-900 mt-17 text-white py-20 px-6 lg:px-24"
@@ -47,21 +52,19 @@ export default function LearnMoreSection() {
           variants={fadeIn}
           transition={{ staggerChildren: 0.12 }}
         >
-          {["Energy", "Art", "Alternative Lending", "Blockchain Solutions"].map(
-            (item) => (
-              <motion.div
-                key={item}
-                className="flex justify-between items-center py-2 cursor-pointer group"
-                variants={fadeIn}
-                whileHover={{ x: 4 }}
-              >
-                <span className="text-lg group-hover:text-green-300 transition">
-                  <Link to={item}>{item}</Link>
-                </span>
-                <ArrowRight className="w-5 h-5 text-green-400 group-hover:translate-x-1 transition" />
-              </motion.div>
-            )
-          )}
+          {strategiesLinks.map((link, index) => (
+            <motion.div
+              key={index}
+              className="flex justify-between items-center py-2 cursor-pointer group"
+              variants={fadeIn}
+              whileHover={{ x: 4 }}
+            >
+              <span className="text-lg group-hover:text-green-300 transition">
+                <Link to={link.path}>{link.label}</Link>
+              </span>
+              <ArrowRight className="w-5 h-5 text-green-400 group-hover:translate-x-1 transition" />
+            </motion.div>
+          ))}
         </motion.div>
       </motion.div>
 
