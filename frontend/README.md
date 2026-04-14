@@ -110,3 +110,6 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/peerlink
 # OR Node (if implemented)
 npm install
 npm run dev
+
+I used JWT-based authentication where the backend issues a token on login, and the frontend stores it and attaches it to subsequent requests via Authorization headers.
+“I focused on simplicity and clarity while ensuring all required features—authentication, user accounts, and relationships—are implemented cleanly. I prioritized a working full-stack flow over unnecessary complexity.”

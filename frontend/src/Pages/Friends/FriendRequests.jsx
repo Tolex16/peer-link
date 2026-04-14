@@ -40,13 +40,7 @@ export default function FriendRequest() {
                   onClick={() => handleAction(req.id)}
                   className="bg-blue-500 text-white px-3 py-1 rounded"
                 >
-                  Accept
-                </button>
-                <button
-                  onClick={() => handleAction(req.id)}
-                  className="bg-gray-200 px-3 py-1 rounded"
-                >
-                  Decline
+                  Follow back
                 </button>
               </div>
             </div>

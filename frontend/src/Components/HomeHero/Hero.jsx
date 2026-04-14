@@ -230,7 +230,7 @@ export default function Hero() {
       <div className="hidden lg:block w-80 ml-8">
         <h3 className="font-semibold mb-4">Suggested for you</h3>
 
-        {["Alex", "Chinedu", "Blessing", "Tolu"].map((name, i) => (
+        {["Alex", "Chinedu", "Blessing", "Tolu","Daniel", "Hilda" ].map((name, i) => (
           <div key={i} className="flex justify-between items-center mb-3">
             <p>{name}</p>
             <button className="text-blue-500 cursor-pointer text-sm">

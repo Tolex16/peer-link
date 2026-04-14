@@ -8,11 +8,11 @@
 		<version>3.2.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.dcg</groupId>
-	<artifactId>digi-cap-group</artifactId>
+	<groupId>com.plk</groupId>
+	<artifactId>peer-link</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>digi-cap-group</name>
-	<description>Portfolio Asset Management platform</description>
+	<name>peer-link</name>
+	<description>Interactive Social Media platform</description>
 	<url/>
 	<licenses>
 		<license/>

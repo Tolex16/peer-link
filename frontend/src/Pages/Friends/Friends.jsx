@@ -51,7 +51,7 @@ export default function Friends() {
 
             <div className="flex gap-2">
               <button className="text-blue-500 text-sm">Message</button>
-              <button className="text-red-500 text-sm">Remove</button>
+              <button className="text-red-500 text-sm">Unfollow</button>
             </div>
           </div>
         ))}
