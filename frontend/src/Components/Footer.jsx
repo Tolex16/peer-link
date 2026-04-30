@@ -10,7 +10,7 @@ import logo from "../assets/icon.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t mt-16">
+    <footer className="bg-white border-t">
       <div className="max-w-6xl mx-auto px-6 py-12">
 
         {/* GRID */}

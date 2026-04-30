@@ -47,14 +47,39 @@ public class ChatController {
         }
     }
 
-	@PostMapping("/add-users/{studentId}/{tutorId}")
-    public ResponseEntity<?> addUser(@PathVariable Long studentId, @PathVariable Long tutorId) {
-     return ResponseEntity.ok(messageService.addUser(studentId,tutorId));
+	 @PostMapping("/send/{receiverId}")
+    public ResponseEntity<?> sendMessage(
+            @PathVariable Long receiverId,
+            @RequestBody String content) {
+
+        return ResponseEntity.ok(
+                messageService.sendMessage(receiverId, content)
+        );
     }
 
-    @PostMapping("/leave-chat/{studentId}/{tutorId}")
-    public ResponseEntity<?> leaveChat(@PathVariable Long studentId, @PathVariable Long tutorId) {
-        return ResponseEntity.ok(messageService.leaveChat(studentId, tutorId));
+    @GetMapping("/thread/{threadId}")
+    public ResponseEntity<?> getMessages(@PathVariable String threadId) {
+        return ResponseEntity.ok(messageService.getMessages(threadId));
+    }
+
+    @GetMapping("/threads")
+    public ResponseEntity<?> getThreads() {
+        return ResponseEntity.ok(messageService.getUserThreads());
+    }
+
+    @DeleteMapping("/{messageId}/{threadId}")
+    public ResponseEntity<?> deleteMessage(
+            @PathVariable Long messageId,
+            @PathVariable String threadId) {
+
+        messageService.deleteMessage(messageId, threadId);
+        return ResponseEntity.ok("Deleted");
+    }
+
+    @DeleteMapping("/thread/{threadId}")
+    public ResponseEntity<?> deleteThread(@PathVariable String threadId) {
+        messageService.deleteThread(threadId);
+        return ResponseEntity.ok("Thread deleted");
     }
 
 	@GetMapping("/messages/{threadId}")
@@ -90,8 +115,18 @@ public class ChatController {
     return messageService.getChatThreadsByStudent();
     }
 
-    @GetMapping("/following-threads")
-    public List<ChatThread> getChatThreadsByTutor() {
-        return messageService.getChatThreadsByTutor();
-    }
+    @GetMapping("/thread/{threadId}")
+public ResponseEntity<?> getMessages(
+        @PathVariable String threadId,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size) {
+
+    return ResponseEntity.ok(messageService.getMessages(threadId, page, size));
+}
+
+@PostMapping("/read/{threadId}")
+public ResponseEntity<?> markAsRead(@PathVariable String threadId) {
+    messageService.markAsRead(threadId);
+    return ResponseEntity.ok("Marked as read");
+}
 }

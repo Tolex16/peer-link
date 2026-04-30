@@ -205,15 +205,172 @@ public ResponseEntity<ChatMessage> addUser(@PathVariable Long studentId, @PathVa
         }
     }
 
+     // 🔥 CREATE OR GET THREAD
+    private ChatThread getOrCreateThread(Long user1Id, Long user2Id) {
 
-    public List<ChatThread> getChatThreadsByStudent() {
-	Long studentId = jwtService.getUserId();
-    return chatThreadRepository.findAllByStudent_StudentId(studentId);
+        return chatThreadRepository
+            .findByUserOneIdAndUserTwoIdOrUserOneIdAndUserTwoId(
+                user1Id, user2Id, user2Id, user1Id
+            )
+            .orElseGet(() -> {
+                User user1 = userRepository.findById(user1Id)
+                        .orElseThrow(() -> new RuntimeException("User not found"));
+
+                User user2 = userRepository.findById(user2Id)
+                        .orElseThrow(() -> new RuntimeException("User not found"));
+
+                ChatThread thread = ChatThread.builder()
+                        .threadId(UUID.randomUUID().toString())
+                        .userOne(user1)
+                        .userTwo(user2)
+                        .build();
+
+                return chatThreadRepository.save(thread);
+            });
     }
 
-    public List<ChatThread> getChatThreadsByTutor() {
-        Long tutorId = jwtService.geTutorId();
-        return chatThreadRepository.findAllByTutor_TutorId(tutorId);
+    // 🔥 SEND MESSAGE
+    @Transactional
+    public Message sendMessage(Long receiverId, String content) {
+
+        Long senderId = jwtService.getUserId();
+
+        if (senderId.equals(receiverId)) {
+            throw new RuntimeException("Cannot message yourself");
+        }
+
+        ChatThread thread = getOrCreateThread(senderId, receiverId);
+
+        User sender = userRepository.findById(senderId).orElseThrow();
+        User receiver = userRepository.findById(receiverId).orElseThrow();
+
+        Message message = Message.builder()
+                .content(content)
+                .sender(sender)
+                .receiver(receiver)
+                .thread(thread)
+                .build();
+
+        Message savedMessage = messageRepository.save(message);
+
+    // 🔥 UPDATE THREAD (VERY IMPORTANT)
+    thread.setLastMessage(content);
+    thread.setLastMessageTime(LocalDateTime.now());
+
+    // 🔥 UNREAD COUNT LOGIC
+    if (thread.getUserOne().getId().equals(senderId)) {
+        thread.setUserTwoUnreadCount(thread.getUserTwoUnreadCount() + 1);
+    } else {
+        thread.setUserOneUnreadCount(thread.getUserOneUnreadCount() + 1);
     }
+
+    chatThreadRepository.save(thread);
+
+    return savedMessage;
+    }
+	
+	 // 🔥 GET THREAD MESSAGES(PAGINATED)
+	public Page<Message> getMessages(String threadId, int page, int size) {
+
+    Pageable pageable = PageRequest.of(page, size);
+
+    return messageRepository
+            .findByThread_ThreadIdOrderByCreatedAtDesc(threadId, pageable);
+    }
+
+     // 🔥 GET THREAD MESSAGES
+    public List<Message> getMessages(String threadId) {
+        return messageRepository.findByThread_ThreadIdOrderByCreatedAtAsc(threadId);
+    }
+
+    // 🔥 GET USER THREADS
+    public List<ChatThread> getUserThreads() {
+        Long userId = jwtService.getUserId();
+        return chatThreadRepository.findByUserOneIdOrUserTwoId(userId, userId);
+    }
+	
+	// 🔥 GET USER THREADS (WITH SORTING)
+	public List<ChatThread> getUserThreads() {
+
+    Long userId = jwtService.getUserId();
+
+    return chatThreadRepository
+            .findByUserOneIdOrUserTwoId(userId, userId)
+            .stream()
+            .sorted(Comparator.comparing(ChatThread::getLastMessageTime).reversed())
+            .toList();
+}
+
+    // 🔥 DELETE MESSAGE
+    public void deleteMessage(Long messageId, String threadId) {
+        Message message = messageRepository
+                .findByIdAndThread_ThreadId(messageId, threadId)
+                .orElseThrow(() -> new RuntimeException("Message not found"));
+
+        Long currentUser = jwtService.getUserId();
+
+        if (!message.getSender().getId().equals(currentUser)) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        messageRepository.delete(message);
+    }
+
+    // 🔥 DELETE THREAD
+    @Transactional
+    public void deleteThread(String threadId) {
+        ChatThread thread = chatThreadRepository.findByThreadId(threadId)
+                .orElseThrow(() -> new RuntimeException("Thread not found"));
+
+        messageRepository.deleteAll(
+                messageRepository.findByThread_ThreadIdOrderByCreatedAtAsc(threadId)
+        );
+
+        chatThreadRepository.delete(thread);
+    }
+	
+	
+	public void markAsSeen(String threadId) {
+    Long userId = jwtService.getUserId();
+
+    List<Message> messages = messageRepository
+        .findUnseenMessages(threadId, userId);
+
+    messages.forEach(msg -> {
+        msg.setSeen(true);
+        msg.setSeenAt(LocalDateTime.now());
+    });
+
+    messageRepository.saveAll(messages);
+}
+
+    @Transactional
+public void markAsRead(String threadId) {
+
+    Long userId = jwtService.getUserId();
+
+    ChatThread thread = chatThreadRepository.findByThreadId(threadId)
+            .orElseThrow(() -> new RuntimeException("Thread not found"));
+
+    // Reset unread count
+    if (thread.getUserOne().getId().equals(userId)) {
+        thread.setUserOneUnreadCount(0);
+    } else {
+        thread.setUserTwoUnreadCount(0);
+    }
+
+    // Mark messages as read
+    List<Message> messages = messageRepository
+            .findByThread_ThreadIdOrderByCreatedAtDesc(threadId);
+
+    messages.forEach(msg -> {
+        if (msg.getReceiver().getId().equals(userId)) {
+            msg.setRead(true);
+        }
+    });
+
+    messageRepository.saveAll(messages);
+}
+
 
 }

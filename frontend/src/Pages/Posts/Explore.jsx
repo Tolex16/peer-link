@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { FiHeart, FiMessageCircle, FiSearch } from "react-icons/fi";
-import post1 from "../../assets/post1.jpeg";
-import post2 from "../../assets/post2.jpeg";
-import post3 from "../../assets/post3.jpg";
-import post4 from "../../assets/post4.jpg";
-import post5 from "../../assets/post5.jpeg";
+import explore1 from "../../assets/explore1.jpg";
+import explore2 from "../../assets/explore2.jpg";
+import explore3 from "../../assets/explore3.png";
+import explore4 from "../../assets/explore4.jpg";
+import explore5 from "../../assets/explore5.jpg";
+import explore6 from "../../assets/explore6.png";
+import explore7 from "../../assets/explore7.jpg";
+import explore8 from "../../assets/explore8.jpg";
+import explore9 from "../../assets/explore9.jpg";
 import Footer from "../../Components/Footer";
 import Navbar from "../../Components/Navbar";
 
@@ -14,7 +18,7 @@ export default function Explore() {
   const posts = [
     {
       id: 1,
-      image: post1,
+      image: explore1,
       likes: 120,
       comments: 14,
       user: "John Doe",
@@ -22,7 +26,7 @@ export default function Explore() {
     },
     {
       id: 2,
-      image: post2,
+      image: explore2,
       likes: 80,
       comments: 10,
       user: "Jane",
@@ -30,7 +34,7 @@ export default function Explore() {
     },
     {
       id: 3,
-      image: post3,
+      image: explore3,
       likes: 200,
       comments: 45,
       user: "Alex",
@@ -38,7 +42,7 @@ export default function Explore() {
     },
     {
       id: 4,
-      image: post4,
+      image: explore4,
       likes: 300,
       comments: 60,
       user: "Mary",
@@ -46,7 +50,39 @@ export default function Explore() {
     },
     {
       id: 5,
-      image: post5,
+      image: explore5,
+      likes: 150,
+      comments: 20,
+      user: "David",
+      caption: "Stay fit 💪",
+    },
+    {
+      id: 6,
+      image: explore6,
+      likes: 150,
+      comments: 20,
+      user: "David",
+      caption: "Stay fit 💪",
+    },
+    {
+      id: 7,
+      image: explore7,
+      likes: 150,
+      comments: 20,
+      user: "David",
+      caption: "Stay fit 💪",
+    },
+    {
+      id: 8,
+      image: explore8,
+      likes: 150,
+      comments: 20,
+      user: "David",
+      caption: "Stay fit 💪",
+    },
+    {
+      id: 9,
+      image: explore9,
       likes: 150,
       comments: 20,
       user: "David",
@@ -57,7 +93,7 @@ export default function Explore() {
   return (
     <>
       <Navbar />
-      <div className="max-w-6xl mx-auto mt-24 px-4">
+      <div className="max-w-6xl mx-auto mt-24 mb-20 px-4">
         {/* 🔍 Search */}
         <div className="flex items-center gap-2 mb-6 border rounded-xl px-4 py-2">
           <FiSearch />

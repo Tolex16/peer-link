@@ -6,8 +6,8 @@ export default function Friends() {
   const [search, setSearch] = useState("");
 
   const friends = [
-    { id: 1, name: "John Doe", online: true },
-    { id: 2, name: "Jane Smith", online: false },
+    { id: 1, name: "Micheal Dee", online: true },
+    { id: 2, name: "Precious Nnaji", online: false },
     { id: 3, name: "Alex King", online: true },
     { id: 4, name: "Mary Ann", online: false },
   ];

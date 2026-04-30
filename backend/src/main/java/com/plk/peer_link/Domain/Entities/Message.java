@@ -12,7 +12,11 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "peer_link_messaging")
+@Table(name = "messages",
+       indexes = {
+           @Index(name = "idx_thread", columnList = "thread_id"),
+           @Index(name = "idx_sender", columnList = "sender_id")
+       })
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,17 +32,19 @@ public class Message {
     private String receiverFullName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "follower_id", nullable = false)
+    @JoinColumn(name = "sender_id", nullable = false)
     @JsonBackReference
-    private Users follower;
+    private Users sender;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "following_id", nullable = false)
+    @JoinColumn(name = "receiver_id", nullable = false)
     @JsonBackReference
-    private Users following;
+    private Users receiver;
 
-    @Column(name = "content",  length = 1024)
+    @Column(name = "content",  length = 2500)
     private String content;
+	
+	private boolean isRead = false;
 
 	@Column(name = "timestamp")
     private LocalDateTime timestamp;
@@ -47,8 +53,10 @@ public class Message {
     @Column(name = "type")
     private MessageType type;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "thread_id", nullable = false)
     @JsonBackReference
     private ChatThread thread;
+	
+	private LocalDateTime createdAt = LocalDateTime.now();
 }

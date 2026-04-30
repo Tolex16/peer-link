@@ -12,7 +12,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "chat_threads")
+@Table(name = "chat_threads",
+       indexes = @Index(name = "idx_thread_users", columnList = "user_one_id, user_two_id", unique = true))
+
 public class ChatThread {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +28,25 @@ public class ChatThread {
     private List<Message> messages = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "follower_id", nullable = false)
+    @JoinColumn(name = "user_one_id", nullable = false)
     @JsonBackReference
-    private Users follower;
+	private User userOne;
+    
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "following_id", nullable = false)
+    @JoinColumn(name = "user_two_id", nullable = false)
     @JsonBackReference
-    private Users following;
+    private User userTwo;
+	
+	   // 🔥 LAST MESSAGE (FAST FEED)
+    private String lastMessage;
+
+    private LocalDateTime lastMessageTime;
+
+    // 🔥 UNREAD COUNTS (per user)
+    private int userOneUnreadCount = 0;
+    private int userTwoUnreadCount = 0;
+
+	
+	private LocalDateTime createdAt = LocalDateTime.now();
 }

@@ -13,4 +13,10 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 
     Optional<Message> findByIdAndThread_ThreadId(Long messageId, String threadId);
     List<Message> findByThread_ThreadId(String threadId);
+	
+	List<Message> findByThread_ThreadIdOrderByCreatedAtAsc(String threadId);
+
+    Optional<Message> findByIdAndThread_ThreadId(Long id, String threadId);
+	
+	Page<Message> findByThread_ThreadIdOrderByCreatedAtDesc(String threadId, Pageable pageable);
 }
